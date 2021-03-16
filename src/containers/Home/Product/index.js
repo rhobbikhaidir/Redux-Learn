@@ -1,20 +1,11 @@
 import "./index.css";
-import Logo from "../../logo-etanee.png";
-import Cart from "../../cart.png";
+import Logo from "../../../logo-etanee.png";
+import Cart from "../../../cart.png";
 import CardProduct from "./CardProduct";
-
+import { connect } from "react-redux";
 import React, { Component } from "react";
 
-export default class index extends Component {
-  state = {
-    order: 4,
-  };
-
-  handleCounterChange = (newValue) => {
-    this.setState({
-      order: newValue,
-    });
-  };
+class index extends Component {
   render() {
     return (
       <div>
@@ -24,7 +15,7 @@ export default class index extends Component {
           </div>
           <div className="troley">
             <img src={Cart} alt="img-daging-ayam" />
-            <p className="count">{this.state.order}</p>
+            <p className="count">{this.props.order}</p>
           </div>
         </div>
         <CardProduct
@@ -34,3 +25,11 @@ export default class index extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    order: state.totalOrder,
+  };
+};
+
+export default connect(mapStateToProps)(index);

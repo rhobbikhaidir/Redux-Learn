@@ -33,6 +33,19 @@
   border-radius: 10px;
 }
 
+
+.title-navbar-y {
+
+  font-size: 20px;
+  /* text-decoration: none; */
+  background-color: brown;
+  margin-top: 10px;
+  margin-left: 20px;
+  /* width: 100px; */
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 10px;
+}
 .a {
   text-decoration: none;
 }
