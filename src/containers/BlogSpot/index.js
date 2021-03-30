@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./index.css";
 import Post from "../Post";
+import API from "../../services";
 
 export default class index extends Component {
   state = {
@@ -16,26 +17,30 @@ export default class index extends Component {
   };
 
   getApi = () => {
-    axios
-      .get("http://localhost:3004/posts?_sort=id&_order=desc")
-      .then((res) => {
-        console.log(res.data);
-
-        this.setState({
-          post: res.data,
-        });
+    API.getNewsBlog().then((res) => {
+      this.setState({
+        post: res,
       });
+    });
   };
 
   putToApi = () => {
-    axios
-      .put(
-        `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
-        this.state.formBlogPost
-      )
-      .then((res) => {
-        console.log(res);
+    API.updateNewsBlog(
+      this.state.formBlogPost,
+      this.state.formBlogPost.id
+    ).then((res) => {
+      console.log(res);
+      this.getApi();
+      this.setState({
+        isUpdate: false,
+        formBlogPost: {
+          id: 1,
+          title: "",
+          body: "",
+          userId: 1,
+        },
       });
+    });
   };
 
   handleUpdate = (data) => {
@@ -47,7 +52,8 @@ export default class index extends Component {
   };
 
   handleRemove = (data) => {
-    axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+    API.DeleteNewsBlog(data).then((res) => {
+      console.log("Deleting succes");
       this.getApi();
     });
   };
@@ -71,10 +77,18 @@ export default class index extends Component {
   };
 
   postDataToApi = () => {
-    axios
-      .post("http://localhost:3004/posts", this.state.formBlogPost)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    API.postNewsBlog(this.state.formBlogPost).then((res) => {
+      console.log(res);
+      this.getApi();
+      this.setState({
+        formBlogPost: {
+          id: 1,
+          title: "",
+          body: "",
+          userId: 1,
+        },
+      });
+    });
   };
   handleSubmit = () => {
     if (this.state.isUpdate) {
