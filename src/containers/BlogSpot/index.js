@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./index.css";
 import Post from "../Post";
 import API from "../../services";
@@ -98,6 +97,10 @@ export default class index extends Component {
     }
   };
 
+  handleDetail = (id) => {
+    this.props.history.push(`detail-post/${id}`);
+  };
+
   componentDidMount() {
     this.getApi();
   }
@@ -133,6 +136,7 @@ export default class index extends Component {
               data={res}
               remove={this.handleRemove}
               key={res.id}
+              goDetail={this.handleDetail}
               update={this.handleUpdate}
             />
           );

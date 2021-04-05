@@ -2,9 +2,9 @@ import axios from "axios";
 
 import { rootPath } from "./Config";
 
-const Get = (path) => {
+const Get = (path, id, bool) => {
   const promise = new Promise((resolve, reject) => {
-    axios.get(`${rootPath}${path}`).then(
+    axios.get(`${rootPath}${path}${bool ? id : null}`).then(
       (res) => {
         resolve(res.data);
       },

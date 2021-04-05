@@ -5,6 +5,7 @@ import Product from "./Product/product";
 import Youtube from "../../components/Youtube/Youtube";
 import React, { Component } from "react";
 import globalProvider from "../../Context/context";
+import DetailPost from "../BlogSpot/detailPost/DetailPost";
 
 class index extends Component {
   render() {
@@ -25,6 +26,8 @@ class index extends Component {
         </div>
         <div style={{ padding: 30, borderBottom: "1px solid black" }} />
         <Route exact path="/" component={BlogSpot} />
+        <Route exact path="/detail-post/:id" component={DetailPost} />
+
         <Route exact path="/product" component={Product} />
         <Route exact path="/youtubecomp" component={Youtube} />
       </Router>
